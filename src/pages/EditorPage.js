@@ -37,20 +37,19 @@ const EditorPage = () => {
         username: location.state?.username,
       });
 
-      // Listening for joined event
       socketRef.current.on(ACTIONS.JOINED, ({ clients, username, socketId }) => {
         if (username !== location.state?.username) {
           toast.success(`${username} joined the room.`);
         }
+
         setClients(clients);
-        // Emit code synchronization only after initial join
+
         socketRef.current.emit(ACTIONS.SYNC_CODE, {
           code: codeRef.current,
           socketId,
         });
       });
 
-      // Listen for code updates from other users
       socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code }) => {
         if (code !== null) {
           codeRef.current = code;
@@ -75,7 +74,6 @@ const EditorPage = () => {
     };
   }, []);
 
-  // Handle copy Room ID
   async function copyRoomId() {
     try {
       await navigator.clipboard.writeText(roomId);
@@ -86,7 +84,6 @@ const EditorPage = () => {
     }
   }
 
-  // Handle leaving the room
   function leaveRoom() {
     reactNavigator("/");
   }
