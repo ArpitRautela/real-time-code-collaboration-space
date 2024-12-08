@@ -2,6 +2,10 @@
   "name": "real-time-code-collaboration-space",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=18.0.0",
+    "yarn": ">=1.22.0"
+  },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.2.2",
     "@codemirror/state": "^6.4.1",
@@ -24,7 +28,7 @@
   },
   "scripts": {
     "start:front": "react-scripts start",
-    "start": "yarn build && yarn server:prod",
+    "start": "yarn install && yarn build && yarn server:prod",
     "build": "react-scripts build",
     "server:dev": "nodemon server.js",
     "server:prod": "node server.js",
